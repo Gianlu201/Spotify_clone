@@ -1,5 +1,6 @@
 import { UnknownAction } from '@reduxjs/toolkit';
 import { Track, Album, Artist } from '../../types/types';
+import { SET_CURRENT_SONG } from '../actions';
 
 const initialAlbum: Album = {
   id: 0,
@@ -52,7 +53,7 @@ const initialState = {
 
 const mainReducer = (state = initialState, action: UnknownAction) => {
   switch (action.type) {
-    case 'SET_NEW_TRACK':
+    case SET_CURRENT_SONG:
       return {
         ...state,
         currentSong: action.payload,

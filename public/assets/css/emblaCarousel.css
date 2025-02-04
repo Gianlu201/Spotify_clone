@@ -23,6 +23,9 @@
 .embla__slide:hover {
   background-color: #191919;
 }
+.embla__slide:hover .btnPlayMusic {
+  display: flex;
+}
 .embla__controls {
   display: grid;
   grid-template-columns: auto 1fr;

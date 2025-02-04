@@ -36,14 +36,18 @@ export default function Player() {
   return (
     <div className='h-[10vh] max-h-[70px] fixed start-0 bottom-0 w-full bg-black flex justify-between items-center'>
       <div className='flex text-white'>
-        <img src={currentSong.album.cover_small} alt='album picture' />
-        <div className='flex ms-3'>
-          <div>
-            <h5 className=' capitalize'>{currentSong.title}</h5>
-            <span>{currentSong.artist.name}</span>
-          </div>
-          <button>+</button>
-        </div>
+        {currentSong.id !== 0 && (
+          <>
+            <img src={currentSong.album.cover_small} alt='album picture' />
+            <div className='flex ms-3'>
+              <div>
+                <h5 className=' capitalize'>{currentSong.title}</h5>
+                <span>{currentSong.artist.name}</span>
+              </div>
+              <button>+</button>
+            </div>
+          </>
+        )}
       </div>
 
       <div>

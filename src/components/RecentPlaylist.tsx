@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Track } from '../types/types';
 import { BsPlayFill } from 'react-icons/bs';
 import { useAppDispatch } from '../redux/app/hooks';
+import { setCurrentSongAction } from '../redux/actions';
 
 export default function RecentPlaylist() {
   const [recents, setRecents] = useState<Track[]>([]);
@@ -34,10 +35,7 @@ export default function RecentPlaylist() {
   };
 
   const playTrack = (track: Track) => {
-    dispatch({
-      type: 'SET_NEW_TRACK',
-      payload: track,
-    });
+    dispatch(setCurrentSongAction(track));
   };
 
   useEffect(() => {
@@ -65,7 +63,7 @@ export default function RecentPlaylist() {
                   {track.album.title}
                 </h4>
                 <button
-                  className='bg-[#3BE477] rounded-full w-fit aspect-1/1 p-1.5 absolute top-[50%] end-2 translate-y-[-50%] cursor-pointer hidden btnReproduce'
+                  className='bg-[#1ED760] hover:bg-[#3BE477] rounded-full w-fit aspect-1/1 p-1.5 absolute top-[50%] end-2 translate-y-[-50%] cursor-pointer hidden btnReproduce'
                   onClick={() => {
                     playTrack(track);
                   }}
