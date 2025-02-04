@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Track } from '../types/types';
 import { BsPlayFill } from 'react-icons/bs';
+import { useAppDispatch } from '../redux/app/hooks';
 
 export default function RecentPlaylist() {
   const [recents, setRecents] = useState<Track[]>([]);
+
+  const dispatch = useAppDispatch();
 
   const getPlaylist = async () => {
     const query = 'everything';
@@ -30,6 +33,13 @@ export default function RecentPlaylist() {
     }
   };
 
+  const playTrack = (track: Track) => {
+    dispatch({
+      type: 'SET_NEW_TRACK',
+      payload: track,
+    });
+  };
+
   useEffect(() => {
     getPlaylist();
   }, []);
@@ -42,7 +52,7 @@ export default function RecentPlaylist() {
             return (
               <div
                 key={track.id}
-                className='flex items-center mb-4 bg-[#2A2A2A90] me-6 rounded-lg pe-3 cursor-pointer hover:bg-[#33333390] relative'
+                className='flex items-center mb-4 bg-[#2A2A2A90] me-6 rounded-lg pe-3 cursor-pointer hover:bg-[#33333390] relative reproductionArea'
               >
                 <div className='min-w-fit me-3'>
                   <img
@@ -54,9 +64,14 @@ export default function RecentPlaylist() {
                 <h4 className='text-white font-medium capitalize py-1.5 pe-7 textLineClamp'>
                   {track.album.title}
                 </h4>
-                <span className='inline-block bg-[#3BE477] rounded-full w-fit aspect-1/1 p-1.5 absolute top-[50%] end-2 translate-y-[-50%]'>
+                <button
+                  className='bg-[#3BE477] rounded-full w-fit aspect-1/1 p-1.5 absolute top-[50%] end-2 translate-y-[-50%] cursor-pointer hidden btnReproduce'
+                  onClick={() => {
+                    playTrack(track);
+                  }}
+                >
                   <BsPlayFill className=' text-black size-6' />
-                </span>
+                </button>
               </div>
             );
           })}

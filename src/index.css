@@ -16,3 +16,7 @@
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
+
+.reproductionArea:hover .btnReproduce {
+  display: inline-block;
+}
