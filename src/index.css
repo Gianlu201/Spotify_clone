@@ -1,0 +1,18 @@
+@import 'tailwindcss';
+
+* {
+  box-sizing: border-box;
+}
+
+.activeBtn {
+  background-color: white;
+  color: black;
+}
+
+.textLineClamp {
+  display: -webkit-box;
+  -webkit-box-direction: vertical;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
