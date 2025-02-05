@@ -15,6 +15,7 @@ import { Track } from '../types/types';
 import { BsPlayFill } from 'react-icons/bs';
 import { setCurrentSongAction } from '../redux/actions';
 import { useAppDispatch } from '../redux/app/hooks';
+import { Link } from 'react-router';
 
 type PropType = {
   tracks: Track[];
@@ -45,11 +46,14 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           {tracks.map((track) => (
             <div className='embla__slide rounded-lg' key={track.id}>
               <div className=' relative'>
-                <img
-                  className='w-full rounded-lg'
-                  src={track.album.cover_medium}
-                  alt=''
-                />
+                <Link to={`/album/${track.album.id}`}>
+                  <img
+                    className='w-full rounded-lg'
+                    src={track.album.cover_medium}
+                    alt=''
+                  />
+                </Link>
+
                 <button
                   className='btnPlayMusic cursor-pointer bg-[#1ED760] rounded-full justify-center items-center w-fit aspect-1/1 p-1 hover:bg-[#3BE477] absolute bottom-2 end-2 hidden'
                   onClick={() => playTrack(track)}
@@ -57,9 +61,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                   <BsPlayFill className='text-black text-3xl' />
                 </button>
               </div>
-              <p className='text-gray-400 font-medium mt-1'>
+              <Link
+                to={`/artist/${track.artist.id}`}
+                className='text-gray-400 font-medium mt-1'
+              >
                 {track.artist.name}
-              </p>
+              </Link>
             </div>
           ))}
         </div>

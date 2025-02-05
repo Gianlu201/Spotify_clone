@@ -15,6 +15,7 @@ export interface Track {
   artist: Artist;
   album: Album;
   type: string;
+  contributors?: Contributor[];
 }
 
 export interface Artist {
@@ -41,4 +42,41 @@ export interface Album {
   md5_image: string;
   tracklist: string;
   type: string;
+}
+
+export interface Contributor {
+  id: number;
+  name: string;
+  link: string;
+  share: string;
+  picture: string;
+  picture_small: string;
+  picture_medium: string;
+  picture_big: string;
+  picture_xl: string;
+  radio: boolean;
+  tracklist: string;
+  type: string;
+  role: string;
+}
+
+export interface ArtistSrc {
+  id: number;
+  name: string;
+  link: string;
+  share: string;
+  picture: string;
+  picture_small: string;
+  picture_medium: string;
+  picture_big: string;
+  picture_xl: string;
+  nb_album: number;
+  nb_fan: number;
+  radio: boolean;
+  tracklist: string;
+  type: string;
+}
+
+export interface Params {
+  artistId: string;
 }

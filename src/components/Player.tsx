@@ -34,7 +34,7 @@ export default function Player() {
   }, [currentSong]);
 
   return (
-    <div className='h-[10vh] max-h-[70px] fixed start-0 bottom-0 w-full bg-black flex justify-between items-center'>
+    <div className='h-[10vh] max-h-[70px] fixed start-0 bottom-0 z-50 w-full bg-black flex justify-between items-center'>
       <div className='flex text-white'>
         {currentSong.id !== 0 && (
           <>

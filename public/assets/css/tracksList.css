@@ -1,0 +1,11 @@
+.hoverShow {
+  display: none;
+}
+
+.trackRow:hover .hoverShow {
+  display: block;
+}
+
+.trackRow:hover .hoverHidden {
+  display: none;
+}
