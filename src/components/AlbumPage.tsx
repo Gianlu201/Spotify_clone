@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { AlbumSrc } from '../types/types';
 import { BsPlayFill, BsPlusCircle, BsThreeDots } from 'react-icons/bs';
 import TracksList from './TracksList';
+import { calculateTimeStringOrder } from '../utility/utilityFunction';
 
 export default function AlbumPage() {
   const [currentAlbum, setCurrentAlbum] = useState<AlbumSrc>();
@@ -58,7 +59,8 @@ export default function AlbumPage() {
             <p className='font-semibold text-red-500'>
               <span className='text-white'>{currentAlbum?.artist.name}</span> •{' '}
               {currentAlbum?.release_date.slice(0, 4)} •{' '}
-              {currentAlbum?.nb_tracks} songs, {currentAlbum?.duration}
+              {currentAlbum?.nb_tracks} songs,{' '}
+              {calculateTimeStringOrder(currentAlbum?.duration || 0)}
             </p>
           </div>
         </div>

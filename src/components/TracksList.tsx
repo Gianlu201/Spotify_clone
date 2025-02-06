@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../redux/app/hooks';
 import { setCurrentSongAction } from '../redux/actions';
 import { useParams } from 'react-router';
+import { calculateTimeFromSeconds } from '../utility/utilityFunction';
 
 interface TracksListProps {
   artist: Artist;
@@ -82,7 +83,7 @@ export default function TracksList(props: TracksListProps) {
                 </button>
               </div>
               <div className='col-span-2 flex items-center'>
-                <span>{track.duration}</span>
+                <span>{calculateTimeFromSeconds(track.duration)}</span>
               </div>
               <div className='col-span-1 flex items-center'>
                 <BsThreeDots className='hoverShow cursor-pointer text-gray-500 hover:text-white' />

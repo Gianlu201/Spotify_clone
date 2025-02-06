@@ -13,6 +13,7 @@ import {
 import { useAppSelector } from '../redux/app/hooks';
 import { useEffect, useState } from 'react';
 import { Track } from '../types/types';
+import { calculateTimeFromSeconds } from '../utility/utilityFunction';
 
 export default function Player() {
   const [reproductionState, setReproductionState] = useState(false);
@@ -41,13 +42,13 @@ export default function Player() {
   }, [currentSong]);
 
   useEffect(() => {
-    const sound = document.getElementById('audio');
+    const sound = document.getElementById('audio') as HTMLAudioElement;
     sound.volume = volumeLevel / 100;
   }, [volumeLevel]);
 
   return (
     <div className='h-[10vh] max-h-[70px] fixed start-0 bottom-0 z-50 w-full bg-black flex justify-between items-center px-5'>
-      <div className='flex text-white'>
+      <div className='flex text-white w-[300px] border border-red-700'>
         {currentSong.id !== 0 && (
           <>
             <img src={currentSong.album.cover_small} alt='album picture' />
@@ -62,35 +63,41 @@ export default function Player() {
         )}
       </div>
 
-      <div>
-        <div>
-          <button>
-            <BsShuffle className='text-white' />
+      <div className='w-[500px] border border-red-700'>
+        <div className='flex justify-center items-center gap-3'>
+          <button className='cursor-pointer'>
+            <BsShuffle className='text-xl text-white' />
           </button>
-          <button>
-            <BsSkipStartFill className='text-white' />
+          <button className='cursor-pointer'>
+            <BsSkipStartFill className='text-2xl text-white' />
           </button>
-          <button onClick={() => handlePlayPause()}>
+          <button className='cursor-pointer' onClick={() => handlePlayPause()}>
             {reproductionState ? (
-              <BsPauseFill className='text-white' />
+              <BsPauseFill className='text-2xl text-white' />
             ) : (
-              <BsPlayFill className='text-white' />
+              <BsPlayFill className='text-2xl text-white' />
             )}
           </button>
-          <button>
-            <BsSkipEndFill className='text-white' />
+          <button className='cursor-pointer'>
+            <BsSkipEndFill className='text-2xl text-white' />
           </button>
-          <button>
-            <BsRepeat className='text-white' />
+          <button className='cursor-pointer'>
+            <BsRepeat className='text-xl text-white' />
           </button>
         </div>
-        <div>
+
+        <div className='mt-1'>
           <audio src={currentSong.preview} id='audio' autoPlay />
-          <input type='range' name='player' />
+          <div className='flex gap-3 text-white'>
+            <span>00:00</span>
+            <input type='range' name='player' className='w-full' />
+
+            <span>{calculateTimeFromSeconds(currentSong.duration)}</span>
+          </div>
         </div>
       </div>
 
-      <div className='flex items-center'>
+      <div className='flex items-center border border-red-700'>
         <button
           className='cursor-pointer'
           onClick={() => {
