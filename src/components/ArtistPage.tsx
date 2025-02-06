@@ -5,7 +5,10 @@ import { AlbumSrc, ArtistSrc, Contributor, Track } from '../types/types';
 import { BsPatchCheckFill, BsPlayFill, BsThreeDots } from 'react-icons/bs';
 import TracksList from './TracksList';
 import { useAppDispatch } from '../redux/app/hooks';
-import { setCurrentSongAction } from '../redux/actions';
+import {
+  setCurrentAlbumTracksAction,
+  setCurrentSongAction,
+} from '../redux/actions';
 
 const initialArtist: ArtistSrc = {
   id: 0,
@@ -306,20 +309,33 @@ export default function ArtistPage() {
                 return (
                   <div
                     key={album.id}
-                    className=' col-span-1 px-3 py-3 rounded-md overflow-x-hidden hover:bg-[#2A2A2A]'
+                    className='trackCard col-span-1 px-3 py-3 rounded-md overflow-x-hidden hover:bg-[#2A2A2A]'
                   >
-                    <div>
+                    <div className='relative'>
                       <img
                         src={album.cover_medium}
                         alt='track album image'
                         className='w-[100%] mx-auto cursor-pointer rounded-lg'
                       />
+                      <button
+                        className='btnPlayMusic cursor-pointer bg-[#1ED760] rounded-full justify-center items-center w-fit aspect-1/1 p-1 hover:bg-[#3BE477] absolute bottom-2 end-2 hidden'
+                        onClick={() =>
+                          dispatch(
+                            setCurrentAlbumTracksAction(album.tracks.data)
+                          )
+                        }
+                      >
+                        <BsPlayFill className='text-black text-3xl' />
+                      </button>
                     </div>
                     <p className='text-sm font-bold cursor-pointer mt-2'>
                       {album.title}
                     </p>
                     <p className='text-sm text-gray-400 mt-1'>
                       {album.release_date.slice(0, 4)} • album
+                    </p>
+                    <p className='text-sm text-gray-400 mt-1'>
+                      {album.nb_tracks} tracks
                     </p>
                   </div>
                 );

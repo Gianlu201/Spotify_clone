@@ -1,12 +1,13 @@
 import { BsPlayFill, BsPlusCircle, BsThreeDots } from 'react-icons/bs';
-import { ArtistSrc, Track } from '../types/types';
+import { Artist, Track } from '../types/types';
 import '../../public/assets/css/tracksList.css';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../redux/app/hooks';
 import { setCurrentSongAction } from '../redux/actions';
+import { useParams } from 'react-router';
 
 interface TracksListProps {
-  artist: ArtistSrc;
+  artist: Artist;
   tracks: Track[];
 }
 
@@ -15,9 +16,14 @@ export default function TracksList(props: TracksListProps) {
 
   const dispatch = useAppDispatch();
 
+  const params = useParams();
+
   const currentSong = useAppSelector((store) => store.currentSong) as Track;
 
   const getShowNumb = (): number => {
+    if (params.albumId) {
+      return props.tracks.length;
+    }
     if (showMore) {
       return 10;
     } else return 5;
@@ -85,18 +91,20 @@ export default function TracksList(props: TracksListProps) {
           );
         })}
       </div>
-      <button
-        className='ms-6 mt-3 cursor-pointer text-gray-500 font-bold hover:text-white'
-        onClick={() => {
-          if (showMore) {
-            setShowMore(false);
-          } else {
-            setShowMore(true);
-          }
-        }}
-      >
-        {showMore ? 'Show less' : 'Show more'}
-      </button>
+      {props.tracks.length > 5 && !params?.albumId && (
+        <button
+          className='ms-6 mt-3 cursor-pointer text-gray-500 font-bold hover:text-white'
+          onClick={() => {
+            if (showMore) {
+              setShowMore(false);
+            } else {
+              setShowMore(true);
+            }
+          }}
+        >
+          {showMore ? 'Show less' : 'Show more'}
+        </button>
+      )}
     </div>
   );
 }

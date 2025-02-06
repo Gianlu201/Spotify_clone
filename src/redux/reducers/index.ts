@@ -1,6 +1,6 @@
 import { UnknownAction } from '@reduxjs/toolkit';
 import { Track, Album, Artist } from '../../types/types';
-import { SET_CURRENT_SONG } from '../actions';
+import { SET_CURRENT_ALBUM_TRACKS, SET_CURRENT_SONG } from '../actions';
 
 const initialAlbum: Album = {
   id: 0,
@@ -49,6 +49,7 @@ const initialTrack: Track = {
 
 const initialState = {
   currentSong: initialTrack,
+  currentAlbumTracks: [],
 };
 
 const mainReducer = (state = initialState, action: UnknownAction) => {
@@ -57,6 +58,13 @@ const mainReducer = (state = initialState, action: UnknownAction) => {
       return {
         ...state,
         currentSong: action.payload,
+      };
+
+    case SET_CURRENT_ALBUM_TRACKS:
+      return {
+        ...state,
+        currentSong: action.payload[0],
+        currentAlbumTrack: action.payload,
       };
 
     default:
