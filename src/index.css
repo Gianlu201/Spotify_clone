@@ -20,3 +20,7 @@
 .reproductionArea:hover .btnReproduce {
   display: inline-block;
 }
+
+.trackCard:hover .btnPlayMusic {
+  display: block;
+}

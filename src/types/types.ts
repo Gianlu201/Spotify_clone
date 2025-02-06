@@ -21,12 +21,12 @@ export interface Track {
 export interface Artist {
   id: number;
   name: string;
-  link: string;
-  picture: string;
-  picture_small: string;
-  picture_medium: string;
-  picture_big: string;
-  picture_xl: string;
+  link?: string;
+  picture?: string;
+  picture_small?: string;
+  picture_medium?: string;
+  picture_big?: string;
+  picture_xl?: string;
   tracklist: string;
   type: string;
 }
@@ -74,6 +74,35 @@ export interface ArtistSrc {
   nb_fan: number;
   radio: boolean;
   tracklist: string;
+  type: string;
+  role?: string;
+}
+
+export interface AlbumSrc extends Album {
+  upc: string;
+  link: string;
+  share: string;
+  genre_id: number;
+  genres: { data: Genre[] };
+  label: string;
+  nb_tracks: number;
+  duration: number;
+  fans: number;
+  release_date: string;
+  record_type: string;
+  available: boolean;
+  explicit_lyrics: boolean;
+  explicit_content_lyrics: number;
+  explicit_content_cover: number;
+  contributors: Contributor[];
+  artist: Artist;
+  tracks: { data: Track[] };
+}
+
+export interface Genre {
+  id: number;
+  name: string;
+  picture: string;
   type: string;
 }
 
